@@ -205,6 +205,7 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 func getOrders(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var orders []Order
+	// preload items with the associated with the foreign key
 	db.Preload("Items").Find(&orders)
 	json.NewEncoder(w).Encode(orders)
 }
